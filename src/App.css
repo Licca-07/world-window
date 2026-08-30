@@ -229,8 +229,6 @@ button {
 .video-plane {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  filter: brightness(1.2) contrast(1.06);
 }
 
 .player-host,
@@ -240,13 +238,13 @@ button {
   border: 0;
 }
 
-/* Cover the viewport and crop YouTube’s black title/control bars. */
+/* Scale the 16:9 player to cover the viewport */
 .player-host {
   position: absolute;
   inset: 50% auto auto 50%;
   width: max(100%, 177.78vh);
   height: max(100%, 56.25vw);
-  transform: translate(-50%, -50%) scale(1.38);
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
