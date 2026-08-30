@@ -2,7 +2,9 @@
 
 Public YouTube live cameras — cities and nature — rotating every 45 seconds.
 
-**Live:** https://licca-07.github.io/world-window/
+**Live:** https://world-window.vercel.app
+
+GitHub Pages mirror: https://licca-07.github.io/world-window/
 
 ## Scripts
 
