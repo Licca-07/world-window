@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const TRACK = '/audio/smooth-like-jazz.mp3'
+const TRACK = `${import.meta.env.BASE_URL}audio/smooth-like-jazz.mp3`
 const FADE_MS = 1400
 /** Keep the bed warm and night-friendly — cut sparkly highs. */
 const LOWPASS_HZ = 2100

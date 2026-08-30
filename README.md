@@ -2,6 +2,8 @@
 
 Public YouTube live cameras — cities and nature — rotating every 45 seconds.
 
+**Live:** https://licca-07.github.io/world-window/
+
 ## Scripts
 
 ```bash
