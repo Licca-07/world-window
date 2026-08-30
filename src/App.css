@@ -229,6 +229,8 @@ button {
 .video-plane {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+  filter: brightness(1.2) contrast(1.06);
 }
 
 .player-host,
@@ -238,24 +240,14 @@ button {
   border: 0;
 }
 
-/* Scale the 16:9 player to cover the viewport */
+/* Cover the viewport and crop YouTube’s black title/control bars. */
 .player-host {
   position: absolute;
   inset: 50% auto auto 50%;
   width: max(100%, 177.78vh);
   height: max(100%, 56.25vw);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.38);
   pointer-events: none;
-}
-
-.vignette {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(7, 17, 14, 0.72) 0%, transparent 28%),
-    linear-gradient(0deg, rgba(7, 17, 14, 0.88) 0%, transparent 38%),
-    radial-gradient(ellipse at center, transparent 40%, rgba(7, 17, 14, 0.35) 100%);
 }
 
 .top-bar {
@@ -269,6 +261,12 @@ button {
   justify-content: space-between;
   gap: 1rem;
   padding: clamp(1rem, 3vw, 1.75rem) clamp(1rem, 3vw, 2rem);
+}
+
+.top-bar .brand-mark,
+.place-name,
+.local-time {
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55);
 }
 
 .top-bar .brand-mark {
@@ -363,6 +361,14 @@ button {
 .place-name a:focus-visible {
   background-size: 100% 2px;
   outline: none;
+}
+
+.place-meta,
+.place-category,
+.local-label,
+.local-date,
+.countdown {
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
 }
 
 .place-meta {

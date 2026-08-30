@@ -17,9 +17,9 @@ npm run preview  # preview production build
 
 ## Music
 
-A quiet lofi loop plays after you open the window (cameras stay muted). Adjust the volume slider on the start screen or top-right.
+A quiet five-song Mixkit loop plays after you open the window (cameras stay muted). Adjust the volume slider on the start screen or top-right.
 
-Track: [Smooth Like Jazz](https://mixkit.co/free-stock-music/smooth-like-jazz-24/) from Mixkit, used under the [Mixkit License](https://mixkit.co/license/#musicFree). A gentle low-pass keeps it night-friendly.
+Tracks, under the [Mixkit License](https://mixkit.co/license/#musicFree): [Valley Sunset](https://mixkit.co/free-stock-music/valley-sunset-127/), [Forest Mist Whispers](https://mixkit.co/free-stock-music/forest-mist-whispers-148/), [Vastness](https://mixkit.co/free-stock-music/vastness-184/), [Rest Now](https://mixkit.co/free-stock-music/rest-now-584/), [Deep Meditation](https://mixkit.co/free-stock-music/deep-meditation-109/). A gentle low-pass keeps it night-friendly.
 
 ## Customize cameras
 

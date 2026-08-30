@@ -1,17 +1,27 @@
 import { useEffect, useRef } from 'react'
 
-const TRACK = `${import.meta.env.BASE_URL}audio/smooth-like-jazz.mp3`
-const FADE_MS = 1400
-/** Keep the bed warm and night-friendly — cut sparkly highs. */
-const LOWPASS_HZ = 2100
+const TRACKS = [
+  'valley-sunset.mp3',
+  'forest-mist-whispers.mp3',
+  'vastness.mp3',
+  'rest-now.mp3',
+  'deep-meditation.mp3',
+].map((file) => `${import.meta.env.BASE_URL}audio/${file}`)
 
-export const DEFAULT_VOLUME = 0.4
+const FADE_MS = 1400
+const ADVANCE_PAD_S = 0.4
+/** Keep the bed warm and night-friendly — cut sparkly highs. */
+const LOWPASS_HZ = 1600
+
+export const DEFAULT_VOLUME = 0.32
 
 export function useBgm(active: boolean, volume: number) {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const ctxRef = useRef<AudioContext | null>(null)
   const volumeRef = useRef(volume)
   const fadeFrameRef = useRef(0)
+  const indexRef = useRef(0)
+  const advancingRef = useRef(false)
   const muted = volume <= 0.001
 
   useEffect(() => {
@@ -23,12 +33,38 @@ export function useBgm(active: boolean, volume: number) {
   }, [volume, active, muted])
 
   useEffect(() => {
-    const audio = new Audio(TRACK)
-    audio.loop = true
+    indexRef.current = Math.floor(Math.random() * TRACKS.length)
+    const audio = new Audio(TRACKS[indexRef.current])
+    audio.loop = false
     audio.preload = 'auto'
     audio.volume = 0
     audio.crossOrigin = 'anonymous'
     audioRef.current = audio
+
+    const advance = () => {
+      if (advancingRef.current) return
+      advancingRef.current = true
+      indexRef.current = (indexRef.current + 1) % TRACKS.length
+      audio.loop = false
+      audio.src = TRACKS[indexRef.current]
+      audio.load()
+      audio.volume = volumeRef.current
+      void audio.play().catch(() => {
+        // Autoplay can still fail if the user gesture is lost; stay silent.
+      })
+      window.setTimeout(() => {
+        advancingRef.current = false
+      }, 800)
+    }
+
+    const onTimeUpdate = () => {
+      const { duration, currentTime } = audio
+      if (!Number.isFinite(duration) || duration < 1) return
+      if (duration - currentTime <= ADVANCE_PAD_S) advance()
+    }
+
+    audio.addEventListener('ended', advance)
+    audio.addEventListener('timeupdate', onTimeUpdate)
 
     const AudioCtx = window.AudioContext || window.webkitAudioContext
     const ctx = new AudioCtx()
@@ -48,6 +84,8 @@ export function useBgm(active: boolean, volume: number) {
 
     return () => {
       cancelAnimationFrame(fadeFrameRef.current)
+      audio.removeEventListener('ended', advance)
+      audio.removeEventListener('timeupdate', onTimeUpdate)
       audio.pause()
       audio.src = ''
       audioRef.current = null

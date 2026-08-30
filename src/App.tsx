@@ -114,7 +114,7 @@ export default function App() {
           <h1>Look out onto the living planet.</h1>
           <p className="gate-lede">
             Public live cameras — cities and wild places — rotate every 45
-            seconds. Soft lofi music starts when you open.
+            seconds. Quiet music starts when you open.
           </p>
           <VolumePicker value={volume} onChange={setVolume} />
           <button type="button" className="primary" onClick={() => setStarted(true)}>
@@ -133,8 +133,6 @@ export default function App() {
           onError={onError}
         />
       </div>
-
-      <div className="vignette" aria-hidden />
 
       <header className="top-bar">
         <p className="brand-mark">World Window</p>
