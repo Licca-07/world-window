@@ -45,6 +45,7 @@ export function YoutubePlayer({ videoId, onReady, onError }: YoutubePlayerProps)
           fs: 0,
           iv_load_policy: 3,
           disablekb: 1,
+          origin: window.location.origin,
         },
         events: {
           onReady: (event) => {
@@ -61,12 +62,14 @@ export function YoutubePlayer({ videoId, onReady, onError }: YoutubePlayerProps)
             onErrorRef.current?.()
           },
           onStateChange: (event) => {
+            const { data, target } = event
             if (
-              event.data === window.YT!.PlayerState.CUED ||
-              event.data === window.YT!.PlayerState.UNSTARTED
+              data === window.YT!.PlayerState.CUED ||
+              data === window.YT!.PlayerState.UNSTARTED ||
+              data === window.YT!.PlayerState.PAUSED
             ) {
-              event.target.mute()
-              event.target.playVideo()
+              target.mute()
+              target.playVideo()
             }
           },
         },
@@ -97,5 +100,10 @@ export function YoutubePlayer({ videoId, onReady, onError }: YoutubePlayerProps)
     }
   }, [videoId])
 
-  return <div className="player-host" ref={containerRef} />
+  return (
+    <div className="player-wrap">
+      <div className="player-host" ref={containerRef} />
+      <div className="player-shield" aria-hidden />
+    </div>
+  )
 }

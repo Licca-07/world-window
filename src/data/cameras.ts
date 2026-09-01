@@ -868,15 +868,6 @@ export const cameras: Camera[] = [
     videoId: 'a0i1Kg6fROg',
   },
   {
-    id: 'popocatepetl',
-    name: 'Popocatépetl',
-    place: 'Puebla',
-    country: 'Mexico',
-    category: 'nature',
-    timezone: 'America/Mexico_City',
-    videoId: 'a5VnMDnzGmQ',
-  },
-  {
     id: 'laikipia-river',
     name: 'African River',
     place: 'Laikipia',
